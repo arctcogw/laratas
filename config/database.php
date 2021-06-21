@@ -49,8 +49,13 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'strict' => false,
+	    'engine' => null,
+	    'sslmode' => env('DB_SSLMODE', 'prefer'),
+	    'options' => (env('MYSQL_SSL') && extension_loaded('pdo_mysql')) ? [
+		    PDO::MYSQL_ATTR_SSL_KEY	=> '/ssl/BaltimoreCyberTrustRoot.crt.pem',
+	    ] : []
+
         ],
 
         'pgsql' => [
